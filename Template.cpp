@@ -87,7 +87,7 @@ int mminv(int a, int b) {int arr[3]; extendgcd(a, b, arr); return arr[0];} //for
 int mminvprime(int a, int b) {return expo(a, b - 2, b);}
 bool revsort(int a, int b) {return a > b;}
 int combination(int n, int r, int m, int *fact, int *ifact) {int val1 = fact[n]; int val2 = ifact[n - r]; int val3 = ifact[r]; return (((val1 * val2) % m) * val3) % m;}
-void google(int t) {cout << "Case #" << t << ": ";}
+void google(int t) {cout << "Case " << t << ": ";}
 vector<int> sieve(int n) {int*arr = new int[n + 1](); vector<int> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
 int mod_add(int a, int b, int m) {a = a % m; b = b % m; return (((a + b) % m) + m) % m;}
 int mod_mul(int a, int b, int m) {a = a % m; b = b % m; return (((a * b) % m) + m) % m;}
@@ -112,6 +112,8 @@ int32_t main()
     cout.setf(ios::fixed);
     int t = 1;
     cin >> t;
-    while (t--)
+    for(int z = 1; z<=t; z++){
+        // google(z);
         solve();
+    }
 }
