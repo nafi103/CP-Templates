@@ -50,13 +50,14 @@ struct Graph{
     vector<int> dijsktra(int src)
     {
         priority_queue<pii, vector<pii>, greater<pii>> pq;
-        vi distance(n, INT_MAX);
+        vi distance(n+1, INT_MAX);
         distance[src] = 0;
         pq.push({0, src});
         while (!pq.empty())
         {
             pii p = pq.top();
             pq.pop();
+            if(p.ff>distance[p.ss])    continue;
             for (auto &[nbr,wt] : v[p.second])
             {
                 if (distance[nbr] > distance[p.second] + wt)
