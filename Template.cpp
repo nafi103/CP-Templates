@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+=#include <bits/stdc++.h>
 #include<ext/pb_ds/assoc_container.hpp>
 #include<ext/pb_ds/tree_policy.hpp>
 
@@ -31,6 +31,7 @@ using namespace __gnu_pbds;
 #define yes cout<<"YES"<<endl
 #define no cout<<"NO"<<endl
 #define remove_punctuation(text) regex_replace(text, regex(R"([^\w\s])"), "")
+#define LSOne(x) ((x)&(-x))
 #define safe_map unordered_map <long long, long long, custom_hash>
 #define safe_hash_table gp_hash_table <long long, long long, custom_hash>
 
