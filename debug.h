@@ -14,6 +14,7 @@ void _print(unsigned long long t) {cerr << t;}
 // Templates for containers and pairs
 template <typename T, typename V> void _print(pair<T, V> p);
 template <typename T> void _print(vector<T> v);
+template <typename T> void _print(pbds<T> v);
 template <typename T> void _print(set<T> v);
 template <typename T> void _print(multiset<T> v);
 template <typename T, typename V> void _print(map<T, V> v);
@@ -25,6 +26,11 @@ void _print(pair<T, V> p) {
 
 template <typename T> 
 void _print(vector<T> v) {
+    cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";
+}
+
+template <typename T> 
+void _print(pbds<T> v) {
     cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";
 }
 
