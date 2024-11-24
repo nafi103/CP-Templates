@@ -8,14 +8,17 @@ using namespace __gnu_pbds;
 
 /****************************************************************/
 
+#define int long long
+#define pi acos(-1.0)
 #define mod 998244353
+#define inf 1e18+10
 #define pb push_back
-#define inf 1e8+10
 #define ff first
 #define ss second
+#define sz(x) (int)(x).size()
 #define set_bits(x) __builtin_popcount(x)
+#define LSOne(x) ((x)&(-x))
 #define all(x) x.begin(), x.end()
-#define fastIO ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr)
 #define readv(v)      \
     for (auto &x : v) \
     cin >> x
@@ -24,11 +27,10 @@ using namespace __gnu_pbds;
     cout << x << " "; \
     cout<<endl
 #define endl "\n"
-#define int long long
 #define yes cout<<"YES"<<endl
 #define no cout<<"NO"<<endl
 #define remove_punctuation(text) regex_replace(text, regex(R"([^\w\s])"), "")
-#define LSOne(x) ((x)&(-x))
+#define fastIO ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr)
 template <class T> using pbds = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update >;
 
 #ifndef ONLINE_JUDGE
@@ -43,20 +45,7 @@ template <class T> using pbds = tree<T, null_type, less_equal<T>, rb_tree_tag, t
 
 void solve()
 {
-    int x,m;
-    cin>>x>>m;
-    int last_multiple = m - m%x;
-    int ans = (last_multiple/x) - (x<last_multiple);
-    if((last_multiple^x)>=1 and (last_multiple^x)<=m) ans++;
-    last_multiple+=x;
-    if((last_multiple^x)>=1 and (last_multiple^x)<=m) ans++;
-    for(int y = 1; y<=min(x,m); y++){
-        int Xor = x^y;
-        if(Xor%y==0) ans++;
-    }
-    if(x<=m) ans--;
-    debug(ans);
-    cout<<ans<<endl;
+    
 }
 
 int32_t main()
