@@ -4,6 +4,7 @@
 #define DEBUG_H
 
 void _print(int t) {cerr << t;}
+void _print(bool t) {cerr << t;}
 void _print(string t) {cerr << t;}
 void _print(char t) {cerr << t;}
 void _print(long double t) {cerr << t;}
