@@ -10,13 +10,12 @@ using namespace __gnu_pbds;
 
 #define int long long
 #define pi acos(-1.0)
-#define mod 998244353
+const int mod = 998244353;
 #define inf 1e18+10
 #define pb push_back
 #define ff first
 #define ss second
 #define sz(x) (int)(x).size()
-#define set_bits(x) __builtin_popcount(x)
 #define LSOne(x) ((x)&(-x))
 #define all(x) x.begin(), x.end()
 #define readv(v)      \
