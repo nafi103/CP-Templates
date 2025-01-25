@@ -1,32 +1,46 @@
-vector<int> v, t;
+struct S{
+    int value;
 
-void buildSegTree(int node, int b, int e){
-    if(b==e){
-        t[node] = v[e];
-        return;
+    S(int val = 0) : value(val) {} //if sum set to -> 0, min -> inf, max -> -inf
+
+    void read(){
+        cin>>value;
     }
-    int left = 2*node, right = 2*node+1, mid = (b+e)/2;
-    buildSegTree(left, b, mid);
-    buildSegTree(right, mid+1, e);
-    t[node] = t[left]+t[right];
+};
+
+S combine(S &a, S &b){
+    return S(a.value+b.value); //change opertation for min,max
 }
 
-void update(int node, int b,int e, int i, int x){
-    if(b==e and e==i){
-        t[node] = x;
-        return;
-    }
-    int left = 2*node, right = 2*node+1, mid = (b+e)/2;
-    if(i<=mid) update(left, b,mid, i, x);
-    else update(right, mid+1, e, i, x);
-    t[node] = t[left]+t[right];
-}
+struct Segment_Tree{
+    int n;
+    vector<S>t;
 
-int query(int node, int b, int e, int l, int r){
-    if(r<b or l>e){
-        return 0;
+    Segment_Tree(int _n){
+        n = _n;
+        t.resize(2*n);
     }
-    if(b>=l and e<=r)   return t[node];
-    int left = 2*node, right = 2*node+1, mid = (b+e)/2;
-    return query(left,b,mid,l,r)+query(right,mid+1,e,l,r);
-}
+
+    void place(){
+        for(int i = n; i<2*n; i++){
+            t[i].read();
+        }
+    }
+
+    void build(){
+        for (int i = n - 1; i > 0; --i) t[i] = combine(t[i<<1], t[i<<1|1]);
+    }
+
+    void modify(int p, const S &value) {
+        for (t[p += n] = value; p >>= 1; ) t[p] = combine(t[p<<1], t[p<<1|1]);
+    }
+
+    S query(int l, int r) {
+        S resl, resr;
+        for (l += n, r += n; l < r; l >>= 1, r >>= 1) {
+            if (l&1) resl = combine(resl, t[l++]);
+            if (r&1) resr = combine(t[--r], resr);
+        }
+        return combine(resl, resr);
+    }
+};
