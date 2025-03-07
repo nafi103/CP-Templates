@@ -19,7 +19,7 @@ void Union(int a, int b){
     if(_size[a]<_size[b]) swap(a,b); //union by size 
     parent[b] = a; 
     _size[a]+=_size[b]; 
-} 
+}
  
 void solve(){
     int n,k; 
