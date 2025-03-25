@@ -1,4 +1,4 @@
-vi hashPrimes = {1000000009, 100000007};
+vi hashPrimes = {1000000009, 100000007}; 
 vector<vi> powersOfBase,inversePowersOfBase;
 
 void findInversePower(int primes, int n){
