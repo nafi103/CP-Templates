@@ -1,4 +1,4 @@
-struct S{
+struct S{ 
     int value;
 
     S(int val = 0) : value(val) {} //if sum set to -> 0, min -> inf, max -> -inf
