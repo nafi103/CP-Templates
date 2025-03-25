@@ -1,7 +1,7 @@
 //Precalculate parents first in main
 
 vector<vi>t,parents;
-vector<int>level;
+vector<int>level; 
 int mx;
 
 void dfs(int node, int parent, int cLevel){
