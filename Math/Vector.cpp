@@ -17,7 +17,6 @@ Point translate(const Point &p, const Vector &v) {
 
 double angle(const Point &a, const Point &o, const Point &b) {
     Vector oa = toVector(o, a), ob = toVector(o, b);
-    // a != o != b
     return acos(dot(oa, ob) / sqrt(norm_sq(oa) * norm_sq(ob)));
 }
 
@@ -38,9 +37,7 @@ double norm_sq(Vector v) { return v.x*v.x + v.y*v.y; }
 double distToLine(Point p, Point a, Point b, Point &c) {
     Vector ap = toVector(a, p), ab = toVector(a, b);
     double u = dot(ap, ab) / norm_sq(ab);
-    // formula: c = a + u*ab
     c = translate(a, scale(ab, u));
-    // translate a to c
     return dist(p, c);
 }
 
