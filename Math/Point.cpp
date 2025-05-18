@@ -27,6 +27,6 @@ double RAD_to_DEG(double r) { return r*180.0 / pi; }
 
 Point rotate(const Point &p, double theta) {
     double rad = DEG_to_RAD(theta);
-    return Point(p.x*cos(rad)- p.y*sin(rad),
-    p.x*sin(rad) + p.y*cos(rad));
+    
+    return Point(p.x*cos(rad)- p.y*sin(rad),p.x*sin(rad) + p.y*cos(rad));
 }
