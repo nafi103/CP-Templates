@@ -3,8 +3,7 @@ const double EPS = 1e-9;
 struct Point {
     double x, y;
     Point() { x = y = 0.0; }
-    // higher precision
-    // default
+
     Point(double _x, double _y) : x(_x), y(_y) {}
 
     bool operator < (Point other) const {
