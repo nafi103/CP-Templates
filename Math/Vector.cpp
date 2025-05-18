@@ -30,3 +30,30 @@ bool ccw(Point p, Point q, Point r) {
 bool collinear(Point p, Point q, Point r) {
     return fabs(cross(toVector(p, q), toVector(p, r))) < EPS;
 }
+
+double dot(Vector a, Vector b) { return (a.x*b.x + a.y*b.y); }
+
+double norm_sq(Vector v) { return v.x*v.x + v.y*v.y; }
+
+double distToLine(Point p, Point a, Point b, Point &c) {
+    Vector ap = toVector(a, p), ab = toVector(a, b);
+    double u = dot(ap, ab) / norm_sq(ab);
+    // formula: c = a + u*ab
+    c = translate(a, scale(ab, u));
+    // translate a to c
+    return dist(p, c);
+}
+
+double distToLineSegment(Point p, Point a, Point b, Point &c) {
+    Vector ap = toVector(a, p), ab = toVector(a, b);
+    double u = dot(ap, ab) / norm_sq(ab);
+    if (u < 0.0) {
+        c = Point(a.x, a.y);
+        return dist(p, a);
+    }
+    if (u > 1.0) {
+        c = Point(b.x, b.y);
+        return dist(p, b);
+    }
+    return distToLine(p, a, b, c);
+}
