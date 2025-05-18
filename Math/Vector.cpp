@@ -15,10 +15,6 @@ Point translate(const Point &p, const Vector &v) {
     return Point(p.x + v.x, p.y + v.y);
 }
 
-double angle(const Point &a, const Point &o, const Point &b) {
-    Vector oa = toVector(o, a), ob = toVector(o, b);
-    return acos(dot(oa, ob) / sqrt(norm_sq(oa) * norm_sq(ob)));
-}
 
 double cross(Vector a, Vector b) { return a.x*b.y- a.y*b.x; }
 
@@ -53,4 +49,9 @@ double distToLineSegment(Point p, Point a, Point b, Point &c) {
         return dist(p, b);
     }
     return distToLine(p, a, b, c);
+}
+
+double angle(const Point &a, const Point &o, const Point &b) {
+    Vector oa = toVector(o, a), ob = toVector(o, b);
+    return acos(dot(oa, ob) / sqrt(norm_sq(oa) * norm_sq(ob)));
 }
