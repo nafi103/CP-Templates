@@ -55,3 +55,23 @@ double angle(const Point &a, const Point &o, const Point &b) {
     Vector oa = toVector(o, a), ob = toVector(o, b);
     return acos(dot(oa, ob) / sqrt(norm_sq(oa) * norm_sq(ob)));
 }
+
+bool intersect(Point &a, Point &b, Point &c, Point &d){
+    if (cross(toVector(a, b), toVector(a, c)) == 0 and in_mid(a, b, c)) {
+        return true;
+    }
+    if (cross(toVector(a, b), toVector(a, d)) == 0 and in_mid(a, b, d)) {
+        return true;
+    }
+    if (cross(toVector(c, d), toVector(c, a)) == 0 and in_mid(c, d, a)) {
+        return true;
+    }
+    if (cross(toVector(c, d), toVector(c, b)) == 0 and in_mid(c, d, b)) {
+        return true;
+    }
+    if(sign(cross(toVector(a,b),toVector(a,c)))!=sign(cross(toVector(a,b),toVector(a,d)))
+        and sign(cross(toVector(c,d),toVector(c,a)))!=sign(cross(toVector(c,d),toVector(c,b)))){
+        return true;
+    }
+    return false;
+}
