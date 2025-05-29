@@ -23,7 +23,7 @@ struct LCS{
         int i = 0, j = 0, len = dp[0][0];
         while(len){
             bool flag = false;
-            for(char c = 'a'; c<='z'; c++){ // maximum LCS 'a' -> 'z'
+            for(char c = 'a'; c<='z'; c++){ // maximum LCS 'z' -> 'a'
                 for(int p = i; p<n; p++){
                     if(a[p]!=c)
                         continue;
