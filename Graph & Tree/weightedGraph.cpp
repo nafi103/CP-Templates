@@ -12,7 +12,7 @@ class check
     }
 };
 struct Graph{
-    vector<vpi>v;
+    vector<vector<pair<int,int>>>v;
     int n;
     Graph(int N){
         v.resize(N+1);
@@ -22,8 +22,8 @@ struct Graph{
         v[uu].pb({vv,wt});
         v[vv].pb({uu,wt});
     }
-    pair<vpi,int> makeMST(int start){
-        vpi mst;
+    pair<vector<pair<int,int>>,int> makeMST(int start){
+        vector<pair<int,int>> mst;
         int cost = 0;
         priority_queue<ele, vector<ele>, check> pq;
         vector<bool>visited(n+1,false);
@@ -47,22 +47,23 @@ struct Graph{
         }
         return {mst,cost};
     }
-    vector<int> dijsktra(int src)
+    vector<int> dijkstra(int src)
     {
-        priority_queue<pii, vector<pii>, greater<pii>> pq;
-        vi distance(n+1, INT_MAX);
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+        vector<int> distance(n+1, inf);
         distance[src] = 0;
         pq.push({0, src});
         while (!pq.empty())
         {
-            pii p = pq.top();
+            auto [d,node] = pq.top();
             pq.pop();
-            if(p.ff>distance[p.ss])    continue;
-            for (auto &[nbr,wt] : v[p.second])
+            if(d>distance[node])
+                continue;
+            for (auto &[nbr,wt] : v[node])
             {
-                if (distance[nbr] > distance[p.second] + wt)
+                if (distance[nbr] > distance[node] + wt)
                 {
-                    distance[nbr] = distance[p.second] + wt;
+                    distance[nbr] = distance[node] + wt;
                     pq.push({distance[nbr], nbr});
                 }
             }
