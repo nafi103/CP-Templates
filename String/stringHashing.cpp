@@ -1,31 +1,33 @@
+vector<int> hashPrimes = {1000000009, 1000000007};
+static constexpr int base = 31, maxLen = 100010;
+vector<vector<int>> powersOfBase, inversePowersOfBase;
+
+void precomputePowers() {
+    int primes = hashPrimes.size();
+    powersOfBase.assign(primes, vector<int>(maxLen + 1));
+    inversePowersOfBase.assign(primes, vector<int>(maxLen + 1));
+    for (int i = 0; i < primes; i++) {
+        powersOfBase[i][0] = 1;
+        for (int j = 1; j <= maxLen; j++) {
+            powersOfBase[i][j] = (base * powersOfBase[i][j - 1]) % hashPrimes[i];
+        }
+        inversePowersOfBase[i][maxLen] = mminvprime(powersOfBase[i][maxLen], hashPrimes[i]);
+        for (int j = maxLen - 1; j >= 0; j--) {
+            inversePowersOfBase[i][j] = (inversePowersOfBase[i][j + 1]* base)% hashPrimes[i];
+        }
+    }
+}
+
 struct Hashing{
     string s;
     int n;
     int primes;
-    vector<int> hashPrimes = {1000000009};
-    const int base = 31;
     vector<vector<int>> hashValues;
-    vector<vector<int>> powersOfBase;
-    vector<vector<int>> inversePowersOfBase;
     Hashing(string a){
         primes = sz(hashPrimes);
         hashValues.resize(primes);
-        powersOfBase.resize(primes);
-        inversePowersOfBase.resize(primes);
         s = a;
-        n = s.length(); 
-        for(int i = 0; i < sz(hashPrimes); i++) {
-            powersOfBase[i].resize(n + 1);
-            inversePowersOfBase[i].resize(n + 1);
-            powersOfBase[i][0] = 1;
-            for(int j = 1; j <= n; j++){
-                powersOfBase[i][j] = (base * powersOfBase[i][j - 1]) % hashPrimes[i];
-            }
-            inversePowersOfBase[i][n] = mminvprime(powersOfBase[i][n], hashPrimes[i]);
-            for(int j = n - 1; j >= 0; j--){
-                inversePowersOfBase[i][j] = mod_mul(inversePowersOfBase[i][j + 1], base, hashPrimes[i]);
-            } 
-        }
+        n = s.length();
         for(int i = 0; i < sz(hashPrimes); i++) {
             hashValues[i].resize(n);
             for(int j = 0; j < n; j++){
@@ -39,7 +41,7 @@ struct Hashing{
         for(int i = 0; i < primes; i++){
             int val1 = hashValues[i][r];
             int val2 = l > 0 ? hashValues[i][l - 1] : 0ll;
-            hash[i] = mod_mul(mod_sub(val1, val2, hashPrimes[i]), inversePowersOfBase[i][l], hashPrimes[i]);
+            hash[i] = ((((val1- val2)%hashPrimes[i] + hashPrimes[i])%hashPrimes[i]) * inversePowersOfBase[i][l]) % hashPrimes[i];
         }
         return hash;
     }
@@ -56,7 +58,7 @@ bool palindromeFound(int k, Hashing& original, Hashing& reversed, int n){
     return false;
 }
 
-int longestPalindrome(vi& lengths, Hashing& original, Hashing& reversed, int n){
+int longestPalindrome(vector<int>& lengths, Hashing& original, Hashing& reversed, int n){
     int ans = 0;
     int start = 0, end = lengths.size() - 1;
     while(start <= end){
@@ -72,7 +74,7 @@ int longestPalindrome(vi& lengths, Hashing& original, Hashing& reversed, int n){
 }
 
 int findLongestPalindrome(int n, Hashing &originalH, Hashing &reversedH){
-    vi oddLength, evenLength;
+    vector<int> oddLength, evenLength;
     for(int i = 1; i <= n; i++){
         if(i & 1){
             oddLength.push_back(i);
