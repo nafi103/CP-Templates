@@ -30,7 +30,7 @@ const int mod = 998244353;
 #define no cout<<"NO"<<endl
 #define remove_punctuation(text) regex_replace(text, regex(R"([^\w\s])"), "")
 #define fastIO ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr)
-template <class T> using pbds = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update >;
+template <class T> using pbds = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update >;
 
 #ifndef ONLINE_JUDGE
 #include "debug.h"
@@ -57,7 +57,7 @@ int32_t main()
     int t = 1;
     cin >> t;
     for(int z = 1; z<=t; z++){
-        // google(z);
+        // cout<<"Case "<<z<<": ";
         solve();
     }
 }
