@@ -1,3 +1,6 @@
+#include<bits/stdc++.h>
+using namespace std;
+
 vector<int> hashPrimes = {1000000009, 1000000007};
 static constexpr int base = 31, maxLen = 100010;
 vector<vector<int>> powersOfBase, inversePowersOfBase;
@@ -26,6 +29,8 @@ struct Hashing{
     Hashing(string a){
         primes = sz(hashPrimes);
         hashValues.resize(primes);
+        if(powersOfBase.empty())
+            precomputePowers();
         s = a;
         n = s.length();
         for(int i = 0; i < sz(hashPrimes); i++) {
