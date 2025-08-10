@@ -1,5 +1,3 @@
-// ...existing code...
-
 struct HopcroftKarp {
     int n, m;
     vector<vector<int>> g;
