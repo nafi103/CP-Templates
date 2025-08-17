@@ -19,7 +19,6 @@ const int mod = 998244353;
     for (auto &x : v) \
     cin >> x
 #define endl "\n"
-#define remove_punctuation(text) regex_replace(text, regex(R"([^\w\s])"), "")
 #define fastIO ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr)
 template <class T> using pbds = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update >;
 
