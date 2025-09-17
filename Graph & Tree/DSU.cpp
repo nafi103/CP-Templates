@@ -16,6 +16,10 @@ struct DSU{
         a = find(a); 
         return _size[a]; 
     }
+
+    bool same_group(int a, int b){
+        return find(a)==find(b);
+    }
     
     void Union(int a, int b){ 
         a = find(a); 
