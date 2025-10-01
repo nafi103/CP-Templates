@@ -1,9 +1,9 @@
 vector<vector<int>> multiply(vector<vector<int>>&a, vector<vector<int>>&b){ 
-    int n = sz(a), m = sz(a[0]);
+    int n = sz(a), m = sz(a[0]), p = sz(b);
     vector<vector<int>>result(n,vector<int>(m,0));
     for(int i = 0; i<n; i++){
         for(int j = 0; j<m; j++){
-            for(int k = 0; k<m; k++){
+            for(int k = 0; k<p; k++){
                 result[i][j]+=(a[i][k]*b[k][j])%mod;
                 result[i][j]%=mod;
             }
