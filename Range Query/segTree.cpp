@@ -25,6 +25,7 @@ struct Segment_Tree{
         for(int i = n; i<2*n; i++){
             t[i].read();
         }
+        build();
     }
 
     void build(){
