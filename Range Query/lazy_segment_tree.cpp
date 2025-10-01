@@ -1,3 +1,5 @@
+const int mt = 0;
+
 struct Lazy_Segment_Tree{
     int n;
     vector<int>v,lazy,st;
@@ -22,6 +24,8 @@ struct Lazy_Segment_Tree{
     }
     
     void propagate(int node, int b, int e){
+        if(lazy[node]==mt)
+            return;
         st[node]+=((e-b+1)*lazy[node]);
         if(b!=e){
             lazy[2*node] += lazy[node];
@@ -31,14 +35,11 @@ struct Lazy_Segment_Tree{
     }
     
     void update(int node, int b, int e, int &l, int &r, int &value){
-        if(lazy[node]!=0) propagate(node, b, e);
+        propagate(node, b, e);
         if(e<l or b>r) return;
         if(b>=l and e<=r){
-            st[node]+=((e-b+1)*value);
-            if(b!=e){
-                lazy[2*node] += value;
-                lazy[2*node+1] += value;
-            }
+            lazy[node] = value;
+            propagate(node,b,e);
             return;
         }
         int mid = (b+e)/2,left = 2*node, right = 2*node+1;
@@ -48,7 +49,7 @@ struct Lazy_Segment_Tree{
     }
     
     int query(int node, int b, int e, int &l, int &r){
-        if(lazy[node]!=0) propagate(node, b, e);
+        propagate(node, b, e);
         if(e<l or b>r) return 0;
         if(b>=l and e<=r){
             return st[node];
