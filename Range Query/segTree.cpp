@@ -1,47 +1,67 @@
-struct S{ 
+struct Node
+{
     int value;
 
-    S(int val = 0) : value(val) {} //if sum set to -> 0, min -> inf, max -> -inf
-
-    void read(){
-        cin>>value;
-    }
+    Node(int val = 0) : value(val) {} // min -> inf, sum -> 0, max -> -inf
 };
 
-S combine(S &a, S &b){
-    return S(a.value+b.value); //change opertation for min,max
+Node merge(Node &left, Node &right)
+{
+    return Node(left.value + right.value);
 }
 
-struct Segment_Tree{
+struct Segment_Tree
+{
     int n;
-    vector<S>t;
+    vector<int> v;
+    vector<Node> st;
 
-    Segment_Tree(int _n){
+    Segment_Tree(vector<int> &_v, int _n)
+    {
         n = _n;
-        t.resize(2*n);
+        st.resize(4 * n);
+        v = _v;
+        build(1, 1, n);
     }
 
-    void place(){
-        for(int i = n; i<2*n; i++){
-            t[i].read();
+    void build(int node, int b, int e)
+    {
+        if (b == e)
+        {
+            st[node] = Node(v[b]);
+            return;
         }
-        build();
+        int mid = (b + e) / 2, left = 2 * node, right = 2 * node + 1;
+        build(left, b, mid);
+        build(right, mid + 1, e);
+        st[node] = merge(st[left], st[right]);
     }
 
-    void build(){
-        for (int i = n - 1; i > 0; --i) t[i] = combine(t[i<<1], t[i<<1|1]);
-    }
-
-    void modify(int p, const S &value) {
-        for (t[p += n] = value; p >>= 1; ) t[p] = combine(t[p<<1], t[p<<1|1]);
-    }
-
-    S query(int l, int r) {
-        S resl, resr;
-        for (l += n, r += n; l < r; l >>= 1, r >>= 1) {
-            if (l&1) resl = combine(resl, t[l++]);
-            if (r&1) resr = combine(t[--r], resr);
+    void update(int node, int b, int e, int &idx, Node &value)
+    {
+        if (e < idx or b > idx)
+            return;
+        if (b == idx and e == idx)
+        {
+            st[node] = value;
+            return;
         }
-        return combine(resl, resr);
+        int mid = (b + e) / 2, left = 2 * node, right = 2 * node + 1;
+        update(left, b, mid, idx, value);
+        update(right, mid + 1, e, idx, value);
+        st[node] = merge(st[left], st[right]);
+    }
+
+    Node query(int node, int b, int e, int &l, int &r)
+    {
+        if (e < l or b > r)
+            return Node();
+        if (b >= l and e <= r)
+        {
+            return st[node];
+        }
+        int mid = (b + e) / 2, left = 2 * node, right = 2 * node + 1;
+        Node query_left = query(left, b, mid, l, r), query_right = query(right, mid + 1, e, l, r);
+        return merge(query_left, query_right);
     }
 };
