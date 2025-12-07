@@ -5,20 +5,15 @@ using namespace std;
 /****************************************************************/
 
 #define int long long
-#define pi acos(-1.0)
-const int mod = 998244353;
-#define inf 1e18 + 10
 #define sz(x) (int)(x).size()
-#define LSOne(x) ((x) & (-x))
 #define all(x) x.begin(), x.end()
 #define endl "\n"
+const int mod = 998244353;
+const int inf = 1e18 + 10
 
-#ifndef ONLINE_JUDGE
+#ifndef LOCAL
 #include "debug.h"
-#define debug(x)                                        \
-    cerr << "Line " << __LINE__ << ": " << #x << " = "; \
-    _print(x);                                          \
-    cerr << endl;
+#define debug(x) cerr << "Line " << __LINE__ << ": " << #x << " = "; _print(x); cerr << endl;
 #else
 #define debug(...)
 #endif
@@ -27,7 +22,7 @@ const int mod = 998244353;
 
 void solve()
 {
-
+    
 }
 
 int32_t main()
