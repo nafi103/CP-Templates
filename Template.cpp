@@ -9,7 +9,7 @@ using namespace std;
 #define all(x) x.begin(), x.end()
 #define endl "\n"
 const int mod = 998244353;
-const int inf = 1e18 + 10
+const int inf = 1e18 + 10;
 
 #ifndef LOCAL
 #include "debug.h"
