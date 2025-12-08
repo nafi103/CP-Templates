@@ -11,9 +11,12 @@ using namespace std;
 const int mod = 998244353;
 const int inf = 1e18 + 10;
 
-#ifndef LOCAL
+#ifdef LOCAL
 #include "debug.h"
-#define debug(x) cerr << "Line " << __LINE__ << ": " << #x << " = "; _print(x); cerr << endl;
+#define debug(x)                                        \
+    cerr << "Line " << __LINE__ << ": " << #x << " = "; \
+    _print(x);                                          \
+    cerr << endl;
 #else
 #define debug(...)
 #endif
